@@ -1,0 +1,23 @@
+.trans-img {
+  transition: transform 0.3s ease;
+}
+
+.trans-img:hover {
+  transform: scale(1.1);
+}
+
+.grid-template {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+}
+
+@media screen and (max-width: 1200px) {
+  .grid-template {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 900px) {
+  .grid-template {
+    grid-template-columns: 1fr;
+  }
+}
