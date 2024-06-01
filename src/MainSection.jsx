@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard ";
 import SelectComponent from "./SelectComponent";
 
-const SearchSection = ({ searchResults, loading }) => {
+const MainSection = ({ searchResults, loading }) => {
   //This is the variable holding datas to display to the users based on their selected preferences...
   const [
     filteredFilmsBasedOnUsersPreference,
@@ -57,4 +57,4 @@ const SearchSection = ({ searchResults, loading }) => {
   );
 };
 
-export default SearchSection;
+export default MainSection;

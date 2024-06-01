@@ -3,25 +3,21 @@ import "./App.css";
 
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import MovieDetails from "./MovieDetails";
-import SearchSection from "./SearchSection";
+import MainSection from "./MainSection";
 import api from "./services/client";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies, setLoading } from "./store/actions";
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
   const dispatch = useDispatch();
 
   const { movies, loading } = useSelector((state) => state.movies);
-
-  const fetchLastSearchQueries = async () => {
+  //
+  const fetchMovieDatas = async () => {
     dispatch(setLoading(true));
     const payload = {
       url: "discover/movie",
-      token:
-        "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZGVmMmRjYWJmYjBiMDc4NDRjYTdkZDE1YWE3N2RkYyIsInN1YiI6IjY2NTYxZjFkMDFmY2EyMTcyMDUwODBmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.m1H6slkzAllzkucrKh244nqBhcbCnQ389E4ZFkfS2rI",
+      token: import.meta.env.VITE_TOKEN,
     };
     try {
       dispatch(setLoading(false));
@@ -32,30 +28,12 @@ function App() {
       dispatch(setLoading(true));
       console.error("Error fetching last search result:", error);
     } finally {
-    }
-  };
-
-  const handleSearch = async () => {
-    setLoading(true);
-
-    const apiUrl = `https://localhost:7003/api/Movie/searchResults?title=${searchQuery}`;
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-
-      setSearchResults(data.search || []);
-      fetchLastSearchQueries();
-      setSearchQuery("");
-    } catch (error) {
-      console.error("Error fetching movie data:", error);
-    } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
   useEffect(() => {
-    fetchLastSearchQueries();
+    fetchMovieDatas();
   }, []);
 
   return (
@@ -85,9 +63,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                <SearchSection searchResults={movies} loading={loading} />
-              }
+              element={<MainSection searchResults={movies} loading={loading} />}
             />
             <Route path="/movie/:id" element={<MovieDetails />} />
           </Routes>

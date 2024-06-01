@@ -14,8 +14,7 @@ function MovieDetails() {
     const fetchMovieDetails = async () => {
       const payload = {
         url: `movie/${id}?language=en-US`,
-        token:
-          "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZGVmMmRjYWJmYjBiMDc4NDRjYTdkZDE1YWE3N2RkYyIsInN1YiI6IjY2NTYxZjFkMDFmY2EyMTcyMDUwODBmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.m1H6slkzAllzkucrKh244nqBhcbCnQ389E4ZFkfS2rI",
+        token: import.meta.env.VITE_TOKEN,
       };
       try {
         const response = await api.get(payload);

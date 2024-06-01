@@ -1,4 +1,3 @@
-// movieReducer.js
 import { FETCH_MOVIES, SET_LOADING } from "../actions";
 
 const initialState = {
